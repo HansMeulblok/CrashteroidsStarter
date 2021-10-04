@@ -125,7 +125,14 @@ public class TestSuite
         float oldTime = game.timer;
         yield return new WaitForSeconds(0.1f);
         Assert.Less(game.timer, oldTime);
+    }
 
+    [UnityTest]
+    public IEnumerator TimeAdded()
+    {
+        float oldTime = game.timer;
+        yield return new WaitForSeconds(0.1f);
+        Assert.Greater(game.timer, oldTime);
     }
 
 }
