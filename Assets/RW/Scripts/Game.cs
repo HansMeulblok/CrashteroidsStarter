@@ -38,6 +38,7 @@ public class Game : MonoBehaviour
     public int score = 0;
     public bool isGameOver = false;
     public float timer;
+    public bool gameStarted = false;
 
 
     [SerializeField]
@@ -54,6 +55,8 @@ public class Game : MonoBehaviour
     private Spawner spawner;
     [SerializeField]
     private float maxTime;
+    [SerializeField]
+    private Text countDownText;
 
     private static Game instance;
 
@@ -69,7 +72,11 @@ public class Game : MonoBehaviour
 
     void Update()
     {
-        timer -= Time.deltaTime;
+        if(gameStarted)
+        {
+            timer -= Time.deltaTime;
+        }
+        countDownText.text = $"Timer: {timer.ToString("F2")}";
     }
 
     public static void GameOver()
@@ -80,10 +87,12 @@ public class Game : MonoBehaviour
         instance.spawner.StopSpawning();
         instance.shipModel.GetComponent<Ship>().Explode();
         instance.gameOverText.enabled = true;
+        instance.gameStarted = false;
     }
 
     public void NewGame()
     {
+        gameStarted = true;
         isGameOver = false;
         titleText.enabled = false;
         startGameButton.SetActive(false);
@@ -102,6 +111,7 @@ public class Game : MonoBehaviour
     {
         instance.score++;
         instance.scoreText.text = "Score: " + instance.score;
+        instance.timer += 0.5f;
     }
 
     public Ship GetShip()
