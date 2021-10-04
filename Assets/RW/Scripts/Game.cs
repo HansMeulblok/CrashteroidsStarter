@@ -37,6 +37,8 @@ public class Game : MonoBehaviour
 {
     public int score = 0;
     public bool isGameOver = false;
+    public float timer;
+
 
     [SerializeField]
     private GameObject shipModel;
@@ -50,6 +52,8 @@ public class Game : MonoBehaviour
     private Text titleText;
     [SerializeField]
     private Spawner spawner;
+    [SerializeField]
+    private float maxTime;
 
     private static Game instance;
 
@@ -59,7 +63,13 @@ public class Game : MonoBehaviour
         titleText.enabled = true;
         gameOverText.enabled = false;
         scoreText.enabled = false;
+        timer = maxTime;
         startGameButton.SetActive(true);
+    }
+
+    void Update()
+    {
+        timer -= Time.deltaTime;
     }
 
     public static void GameOver()
