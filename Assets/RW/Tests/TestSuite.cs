@@ -109,4 +109,14 @@ public class TestSuite
         yield return new WaitForSeconds(0.1f);
         Assert.Greater(game.GetShip().transform.position.x, initialXPos);
     }
+
+    [UnityTest]
+    public IEnumerator NewGameResetsScore()
+    {
+        game.score ++;
+        game.NewGame();
+        yield return new WaitForSeconds(0.1f);
+        Assert.AreEqual(game.score, 0);
+    }
+
 }
