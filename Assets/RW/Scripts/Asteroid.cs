@@ -51,6 +51,15 @@ public class Asteroid : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter(Collider collision) 
+    {
+        if(collision.gameObject.tag == "Shield")
+        {
+            Destroy(gameObject);
+            collision.gameObject.SetActive(false);
+        }
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.name == "ShipModel")
