@@ -46,6 +46,8 @@ public class Ship : MonoBehaviour
     private GameObject laser;
     [SerializeField]
     private Transform shotSpawn;
+    [SerializeField]
+    private GameObject shield;
 
     private float maxLeft = -8;
     private float maxRight = 8;
@@ -124,5 +126,6 @@ public class Ship : MonoBehaviour
         explosion.SetActive(false);
         mesh.enabled = true;
         isDead = false;
+        shield.SetActive(true);
     }
 }
